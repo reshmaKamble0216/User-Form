@@ -1,0 +1,80 @@
+<mat-card appearance="outlined">
+    <mat-card-content>
+        <h1>User Form</h1>
+        <form [formGroup]="userForm" class="example-container">
+            <!-- name field with reset button -->
+            <button color="primary" class="position pt-16" matTooltip="Reset name field" mat-button
+                (click)="resetName()"><mat-icon>refresh</mat-icon></button>
+            <mat-form-field class="input-size">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="Enter your name" formControlName="name">
+                <mat-error
+                    *ngIf="userForm?.controls?.['name']?.hasError('required') && userForm?.controls?.['name']?.touched"
+                    class="form-error-msg"> Name is required
+                </mat-error>
+            </mat-form-field>
+
+            <!-- description field with reset button -->
+            <button color="primary" class="position" matTooltip="Reset description field" mat-button
+                (click)="resetDescription()"><mat-icon>refresh</mat-icon></button>
+            <mat-form-field class=" input-size">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" maxlength="100"
+                    placeholder="Enter your description"></textarea>
+                <div></div>
+                <mat-error
+                    *ngIf="userForm?.controls?.['description']?.hasError('required') && userForm?.controls?.['description']?.touched"
+                    class="form-error-msg">
+                    Description is required
+                </mat-error>
+                <mat-hint align="end">{{userForm.get('description')?.value?.length}}/100</mat-hint>
+                <mat-error *ngIf="userForm.get('description')?.errors?.['maxlength']">
+                    Description can not have more than 100 characters
+                </mat-error>
+            </mat-form-field>
+
+            <!-- state dropdown field with reset button -->
+            <button color="primary" class="position pt-16" matTooltip="Reset state field" mat-button
+                (click)="resetState()"><mat-icon>refresh</mat-icon></button>
+            <mat-form-field class="input-size">
+                <mat-label>State</mat-label>
+                <mat-select formControlName="state">
+                    <mat-option value="maharashtra">Maharashtra</mat-option>
+                    <mat-option value="gujarat">Gujarat</mat-option>
+                    <mat-option value="karnataka">Karnataka</mat-option>
+                    <mat-option value="assam">Assam</mat-option>
+                    <mat-option value="rajasthan">Rajasthan</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="userForm?.controls?.['state']?.hasError('required') && userForm?.controls?.['state']?.touched"
+                    class="form-error-msg">
+                    State is required
+                </mat-error>
+            </mat-form-field>
+            <!-- language checkbox field -->
+            <div class="input-size">
+                <label for="language">Language*:</label>
+                <div *ngFor="let language of languageArray; let i=index;">
+                    <label for="language">
+                        <input type="checkbox" (change)="onChange($event)" [value]="language" name="language"
+                            class="form-check">{{language}}
+                    </label>
+                </div>
+            </div>
+            <!-- gender radio button field -->
+            <div class="input-size">
+                <label for="gender" class="text-muted">Gender*: </label>
+                <div><mat-radio-group formControlName="gender">
+                        <mat-radio-button class="example-margin" value="male">Male</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="female">Female</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="other">Other</mat-radio-button>
+                    </mat-radio-group></div>
+            </div>
+            <!-- submit button -->
+            <div class="button-alignment"><button mat-raised-button color="primary" mat-button
+                    [disabled]="!(userForm.valid)" (click)="onSubmit()">Submit</button>
+
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

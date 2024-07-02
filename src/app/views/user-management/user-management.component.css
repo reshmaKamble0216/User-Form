@@ -1,0 +1,32 @@
+.mat-form-field {
+    display: flex;
+}
+
+.example-margin {
+    margin: 0 12px;
+}
+
+.mat-card {
+    width: 350px;
+    display: flex;
+    margin-left: 20%;
+    background: lightgray;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.input-size {
+    margin-top: 2%;
+}
+
+.button-alignment {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.position {
+    float: right;
+    cursor: pointer;
+    margin-top: 2%;
+}
